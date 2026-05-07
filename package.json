@@ -49,10 +49,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/anthropic/ai-engineering.git"
+    "url": "https://github.com/jiaojianwu/ai-engineering.git"
   },
-  "homepage": "https://github.com/anthropic/ai-engineering#readme",
+  "homepage": "https://github.com/jiaojianwu/ai-engineering#readme",
   "bugs": {
-    "url": "https://github.com/anthropic/ai-engineering/issues"
+    "url": "https://github.com/jiaojianwu/ai-engineering/issues"
   }
 }

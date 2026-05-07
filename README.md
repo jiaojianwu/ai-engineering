@@ -41,7 +41,10 @@ ai-rule-init init --force
 ai-rule-init generate-docs
 
 # 指定输出文件名
-ai-rule-init generate-docs --output MY_DOCS.md
+ai-rule-init generate-docs -o MY_DOCS.md
+
+# 指定目标目录
+ai-rule-init generate-docs -d ./my-project
 ```
 
 ### 查看技能
@@ -62,6 +65,13 @@ ai-rule-init list-skills
 | `-f, --force` | 强制覆盖已有文件 | `false` |
 | `--no-docs` | 跳过文档生成 | `false` |
 | `--no-skills` | 跳过技能文件生成 | `false` |
+
+### generate-docs 命令
+
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-d, --dir <dir>` | 目标目录 | `.` |
+| `-o, --output <output>` | 输出文件名 | `AI_ENGINEERING.md` |
 
 ### 模板类型
 
@@ -169,7 +179,7 @@ opencode.json                    # OpenCode忽略规则
 
 ```bash
 # 克隆仓库
-git clone https://github.com/anthropic/ai-engineering.git
+git clone https://github.com/jiaojianwu/ai-engineering.git
 
 # 安装依赖
 cd ai-engineering
@@ -208,6 +218,6 @@ MIT License
 
 ## 相关链接
 
-- [GitHub 仓库](https://github.com/anthropic/ai-engineering)
-- [问题反馈](https://github.com/anthropic/ai-engineering/issues)
+- [GitHub 仓库](https://github.com/jiaojianwu/ai-engineering)
+- [问题反馈](https://github.com/jiaojianwu/ai-engineering/issues)
 - [npm 包](https://www.npmjs.com/package/@anthropic/ai-engineering)
