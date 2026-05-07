@@ -4,7 +4,7 @@
 
 ## 通用规范
 
-- 遵守 prettier 以及 .prettierrc设定的规范
+- 遵守 prettier 以及 .prettierrc 设定的规范
 
 ## React 组件规范
 
@@ -13,7 +13,7 @@
 - 组件定义后边加展示名: `ComponentName.displayName = 'ComponentName'`
 - 组件职责单一
 - 一个文件内只定义一个组件
-- 保持文件精简（200-300行以内）
+- 保持文件精简（200-300 行以内）
 - **注释**：仅在用户要求时添加注释
 - **状态处理**：API 请求需要 loading 状态
 
@@ -48,41 +48,6 @@ src/pages/PageName/
 ├── index.module.less
 └── index.ts
 ```
-
-然后使用 react router(data mode) 在 `src/routes.tsx` 中添加路由。
-
-```javascript
-/**
-*空间级项目添加路由示例
-*需要用 ProjectEntryPage 组件包裹,并提供 accessKey 作为入参
-*填写path路由名称
-*/
-...
- {
-   path: "[pathName]",
-   element: (
-   <ProjectEntryPage
-   		accessKey="[accessKey]"
-   		emptyDescription="该空间下暂无实收率管理项目"
-   >
-     	<ModeNeme />
-   </ProjectEntryPage>
-            ),
-  }
-...
-
-/**
-* 非空间级项目添加路由示例
-* 填写path名称
-*/
- {
-   path: "[pathName]",
-   element: <ModeNeme />
-  }
-...
-```
-
-
 
 #### API 服务
 

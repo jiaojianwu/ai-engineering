@@ -8,13 +8,12 @@
 ## UI 组件库
 
 - 优先使用 src/components/ 文件夹下的通用组件
-- 其次使用 @hg-data/ark-components
-- 然后使用 Ant Design 6
+- 其次使用 Ant Design 6
 - 最后使用原生 HTML 元素
 
 ## 包管理器
 
-- 使用pnpm作为包管理器
+- 使用 pnpm 作为包管理器
 
 ## 图标
 
@@ -37,5 +36,5 @@
 - 数据处理: lodash
 - 请求管理: useSWR
 - 日期处理: dayjs
-- base64转换工具: js-base64
-- canvas表格:vtable
+- base64 转换工具: js-base64
+- canvas 表格:vtable
