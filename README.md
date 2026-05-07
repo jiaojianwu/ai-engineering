@@ -14,11 +14,19 @@
 
 ## 注意
 
-本文档只是提供一个ai工程化的通用文档,以下部分需要手动修改
+1. 本文档只是提供一个ai工程化的通用文档,以下部分需要手动修改
 
-- `目录结构和本文档不一致,生成文档后参考.agents/rules/文件夹下的各个文件`
-- `技术栈和组件库本文不一致(包括包管理器),生成文档后参考.agents/rules/tech-stack.md`
-- `.agents/AI_WORKFLOW.md中的验证命令`
+   - `目录结构和本文档不一致,生成文档后参考.agents/rules/文件夹下的各个文件`
+
+   - `技术栈和组件库本文不一致(包括包管理器),生成文档后参考.agents/rules/tech-stack.md`
+
+   - `.agents/AI_WORKFLOW.md中的验证命令`
+
+2. 安装后,各复杂模块建议让AI生成说明文档
+
+   - 文档具体公式模版在生成文档后参考`.agents/skills/code-documentation-expert`
+
+
 
 ## 安装
 
