@@ -1,60 +1,56 @@
-import * as fs from 'fs-extra';
-import * as path from 'path';
-import { InitOptions } from '../cli';
+import * as fs from 'fs-extra'
+import * as path from 'path'
+import { InitOptions } from '../cli'
 
 /**
  * 确保目录存在
  */
 export async function ensureDir(dir: string): Promise<void> {
-  await fs.ensureDir(dir);
+  await fs.ensureDir(dir)
 }
 
 /**
  * 复制模板文件到目标目录
  */
-export async function copyTemplates(
-  templatesDir: string,
-  targetDir: string,
-  options: InitOptions
-): Promise<void> {
+export async function copyTemplates(templatesDir: string, targetDir: string, options: InitOptions): Promise<void> {
   // 复制 rules 目录
-  const rulesDir = path.join(templatesDir, 'rules');
+  const rulesDir = path.join(templatesDir, 'rules')
   if (fs.existsSync(rulesDir)) {
     await fs.copy(rulesDir, path.join(targetDir, 'rules'), {
-      overwrite: options.force
-    });
+      overwrite: options.force,
+    })
   }
-  
+
   // 复制 skills 目录
   if (options.skills) {
-    const skillsDir = path.join(templatesDir, 'skills');
+    const skillsDir = path.join(templatesDir, 'skills')
     if (fs.existsSync(skillsDir)) {
       await fs.copy(skillsDir, path.join(targetDir, 'skills'), {
-        overwrite: options.force
-      });
+        overwrite: options.force,
+      })
     }
   }
-  
+
   // 复制根目录文件
-  const rootFiles = ['AI_WORKFLOW.md', 'README.md', 'ignore-rules.txt', 'generate-ignore.js'];
+  const rootFiles = ['AI_WORKFLOW.md', 'README.md', 'ignore-rules.txt', 'generate-ignore.js']
   for (const file of rootFiles) {
-    const srcFile = path.join(templatesDir, file);
-    const destFile = path.join(targetDir, file);
-    
+    const srcFile = path.join(templatesDir, file)
+    const destFile = path.join(targetDir, file)
+
     if (fs.existsSync(srcFile)) {
       if (fs.existsSync(destFile) && !options.force) {
         // 文件已存在且未强制覆盖，跳过
-        continue;
+        continue
       }
-      await fs.copy(srcFile, destFile, { overwrite: options.force });
+      await fs.copy(srcFile, destFile, { overwrite: options.force })
     }
   }
-  
+
   // 生成 AGENTS.md
-  const agentsMdPath = path.join(targetDir, 'AGENTS.md');
+  const agentsMdPath = path.join(targetDir, 'AGENTS.md')
   if (!fs.existsSync(agentsMdPath) || options.force) {
-    const agentsMdContent = generateAgentsMd(options);
-    await fs.writeFile(agentsMdPath, agentsMdContent, 'utf-8');
+    const agentsMdContent = generateAgentsMd(options)
+    await fs.writeFile(agentsMdPath, agentsMdContent, 'utf-8')
   }
 }
 
@@ -91,22 +87,16 @@ export function generateAgentsMd(options: InitOptions): string {
 
 \`\`\`
 src/
-├── pages/       # 页面模块（20 个，均为 index.tsx 目录结构）
-├── components/  # 通用组件（44 个，均为 index.tsx 目录结构）
-├── hooks/       # 自定义 Hooks（14 个，大部分为扁平文件）
-├── utils/       # 工具函数（23 个，扁平文件）
+├── pages/       # 页面模块
+├── components/  # 通用组件
+├── hooks/       # 自定义 Hooks
+├── utils/       # 工具函数
 ├── services/    # API 服务
 ├── store/       # 状态管理
 └── types/       # 类型定义
 \`\`\`
 
 **AI 声明引用**：回答问题时声明读取过哪些 rules 和 skills 和 docs.md（仅展示名称），未读取则如实告知
-
-**固定回执格式**（每轮对话必须输出）：
-\`\`\`
-已读取：[rules 文件名] / [skills 名称] / [docs.md 路径]
-未读取：[未读取的文件]
-\`\`\`
 
 Skills provide specialized instructions and workflows for specific tasks.
 Use the skill tool to load a skill when a task matches its description.
@@ -147,76 +137,76 @@ Use the skill tool to load a skill when a task matches its description.
     <location>file:///path/to/.agents/skills/typescript-expert/SKILL.md</location>
   </skill>
 </available_skills>
-`;
+`
 }
 
 /**
  * 读取文件内容
  */
 export async function readFile(filePath: string): Promise<string> {
-  return await fs.readFile(filePath, 'utf-8');
+  return await fs.readFile(filePath, 'utf-8')
 }
 
 /**
  * 写入文件内容
  */
 export async function writeFile(filePath: string, content: string): Promise<void> {
-  await fs.writeFile(filePath, content, 'utf-8');
+  await fs.writeFile(filePath, content, 'utf-8')
 }
 
 /**
  * 检查文件是否存在
  */
 export async function fileExists(filePath: string): Promise<boolean> {
-  return await fs.pathExists(filePath);
+  return await fs.pathExists(filePath)
 }
 
 /**
  * 获取目录下的所有文件
  */
 export async function getFiles(dir: string): Promise<string[]> {
-  const files: string[] = [];
-  const items = await fs.readdir(dir);
-  
+  const files: string[] = []
+  const items = await fs.readdir(dir)
+
   for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = await fs.stat(fullPath);
-    
+    const fullPath = path.join(dir, item)
+    const stat = await fs.stat(fullPath)
+
     if (stat.isFile()) {
-      files.push(fullPath);
+      files.push(fullPath)
     } else if (stat.isDirectory()) {
-      const subFiles = await getFiles(fullPath);
-      files.push(...subFiles);
+      const subFiles = await getFiles(fullPath)
+      files.push(...subFiles)
     }
   }
-  
-  return files;
+
+  return files
 }
 
 /**
  * 递归创建目录
  */
 export async function mkdirp(dir: string): Promise<void> {
-  await fs.mkdirp(dir);
+  await fs.mkdirp(dir)
 }
 
 /**
  * 删除目录
  */
 export async function rmrf(dir: string): Promise<void> {
-  await fs.remove(dir);
+  await fs.remove(dir)
 }
 
 /**
  * 复制文件或目录
  */
 export async function copy(src: string, dest: string): Promise<void> {
-  await fs.copy(src, dest);
+  await fs.copy(src, dest)
 }
 
 /**
  * 移动文件或目录
  */
 export async function move(src: string, dest: string): Promise<void> {
-  await fs.move(src, dest);
+  await fs.move(src, dest)
 }

@@ -60,7 +60,7 @@ async function copyTemplates(templatesDir, targetDir, options) {
     const rulesDir = path.join(templatesDir, 'rules');
     if (fs.existsSync(rulesDir)) {
         await fs.copy(rulesDir, path.join(targetDir, 'rules'), {
-            overwrite: options.force
+            overwrite: options.force,
         });
     }
     // 复制 skills 目录
@@ -68,7 +68,7 @@ async function copyTemplates(templatesDir, targetDir, options) {
         const skillsDir = path.join(templatesDir, 'skills');
         if (fs.existsSync(skillsDir)) {
             await fs.copy(skillsDir, path.join(targetDir, 'skills'), {
-                overwrite: options.force
+                overwrite: options.force,
             });
         }
     }
@@ -125,22 +125,16 @@ function generateAgentsMd(options) {
 
 \`\`\`
 src/
-├── pages/       # 页面模块（20 个，均为 index.tsx 目录结构）
-├── components/  # 通用组件（44 个，均为 index.tsx 目录结构）
-├── hooks/       # 自定义 Hooks（14 个，大部分为扁平文件）
-├── utils/       # 工具函数（23 个，扁平文件）
+├── pages/       # 页面模块
+├── components/  # 通用组件
+├── hooks/       # 自定义 Hooks
+├── utils/       # 工具函数
 ├── services/    # API 服务
 ├── store/       # 状态管理
 └── types/       # 类型定义
 \`\`\`
 
 **AI 声明引用**：回答问题时声明读取过哪些 rules 和 skills 和 docs.md（仅展示名称），未读取则如实告知
-
-**固定回执格式**（每轮对话必须输出）：
-\`\`\`
-已读取：[rules 文件名] / [skills 名称] / [docs.md 路径]
-未读取：[未读取的文件]
-\`\`\`
 
 Skills provide specialized instructions and workflows for specific tasks.
 Use the skill tool to load a skill when a task matches its description.

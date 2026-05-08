@@ -1,5 +1,7 @@
 # Vibe Coding 工作流
 
+> **注意**：涉及 workbench 目录的需求走 `.cursor/rules/workbench-workflow.mdc` 流程，其余走本工作流。
+
 ## 场景判断（开发前必读）
 
 **根据任务类型选择对应流程，禁止小题大做：**
@@ -18,8 +20,8 @@
 **适用场景**：改文案、修 bug、调样式、改类型、删废弃代码等，预计耗时 < 30 分钟。
 
 ```
-1. 读取 checklist.md
-2. 读取 tech-stack.md（如需要）
+1. 读取 checklist.md + file-priority.md
+2. 按需加载规则文件（tech-stack.md、code-standards.md 等）
 3. 定位代码 → 修改 → 自检
 4. 运行 tsc / lint 验证
 5. 告知用户修改内容
@@ -27,9 +29,7 @@
 
 **自检清单**：
 
-- [ ] 修改范围最小化，不引入无关变更
-- [ ] 符合 code-standards 规范
-- [ ] tsc / lint 通过
+执行 `quality-checklist.md` 中「代码质量检查」和「代码提交前检查」的对应项。
 
 ---
 
@@ -58,6 +58,8 @@
 ## 流程三：完整流程（大功能开发）
 
 **适用场景**：新增页面、复杂功能、跨模块改动，预计耗时 > 2 小时。
+
+> **注意**：如使用 workbench 流程，按 `.cursor/rules/workbench-workflow.mdc` 执行，不使用本并发设计模式。
 
 ```
 阶段1：设计（AI并发）      阶段2：开发（AI执行）     阶段3：交付
@@ -102,7 +104,7 @@
 输出 3 个独立的 md 文件。
 ```
 
-**人工校正（1次）**：
+**人工校正（1 次）**：
 
 - 审核 3 个设计文档
 - 统一反馈，一次性校正
@@ -112,7 +114,7 @@
 
 **开发前必须**：
 
-- 遵循 `AGENTS.md` 中定义的强制步骤（读取 checklist.md、file-priority.md 等）
+- 遵循 `AGENTS.md` 中定义的全部强制步骤（读取 checklist.md、file-priority.md）
 - 按需加载规则文件（tech-stack.md、code-standards.md 等）
 
 **开发流程**：
@@ -122,14 +124,12 @@ for 每个任务 in 任务清单:
     1. 实现代码
     2. 自检（规范、边界、性能）
     3. 更新相关 docs.md（如需要）
-    → 所有任务完成后统一提交
+→ AI 不得主动 git commit 或 git push，除非用户显式要求
 ```
 
 **自检清单**：
 
-- [ ] 代码符合规范
-- [ ] 命名清晰
-- [ ] 边界情况处理
+执行 `quality-checklist.md` 中「代码质量检查」和「代码提交前检查」的对应项。
 
 ### 阶段 3：交付（人工审核）
 
@@ -149,4 +149,4 @@ pnpm run build:web
 
 ---
 
-**修改说明文档**：当修改完成代码后，检查是否有说明文档，如果有更新文档，如果没有询问是否需要创建。创建说明文档参考 `.agents/skills/code-documentation-expert/SKILL.md`。
+**文档补全**：按 `checklist.md` 中的文档处理规则执行。
